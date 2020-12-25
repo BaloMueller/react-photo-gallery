@@ -1,5 +1,6 @@
 import babel from 'rollup-plugin-babel';
 import resolve from 'rollup-plugin-node-resolve';
+import copy from 'rollup-plugin-copy';
 
 const name = 'Gallery';
 const path = 'dist/react-photo-gallery';
@@ -30,7 +31,15 @@ export default [
 			format: 'es',
 		},
 		external: external,
-		plugins: [babel(babelOptions())],
+		plugins: [
+			babel(babelOptions()),
+			copy({
+				targets: [
+				  { src: 'examples/src/*.html', dest: 'dist' },
+				  { src: 'examples/src/*.css', dest: 'dist' },
+				]
+			  })
+		],
 	},
 	{
 		input: 'src/Gallery.js',
@@ -42,5 +51,5 @@ export default [
 		},
 		external: external,
 		plugins: [babel(babelOptions()), resolve()],
-	},
+	}
 ];

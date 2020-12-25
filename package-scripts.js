@@ -10,7 +10,8 @@ module.exports = {
 			description: 'clean dist directory and run all builds',
 			default: series(
 				rimraf('dist'),
-				concurrent.nps('build.rollup')
+				concurrent.nps('build.rollup'),
+				'webpack'
 			),
 			rollup: 'rollup --config',
 		},
